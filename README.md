@@ -1,2 +1,16 @@
-# safe-board-arcade
-Retro console-style game bundle for Safe Board. Features 2 marine arcade games with keyboard and on-screen button controls.
+Запуск проекта:
+npm ci - установка зависимостей
+npm run dev - дев сборка с дев сервером
+
+Можно отдельно сбилдить бандл
+npm run build
+
+Не стесняйтесь добавлять свои скрипты.
+
+И не забудьте описать что у вас получилось.
+
+Что можно описать:
+1. краткую вселенную вашей игры.
+2. запуск приложения
+3. на что обратить внимание
+4. что было поправлено/добавлено
