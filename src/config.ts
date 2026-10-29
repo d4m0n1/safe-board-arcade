@@ -28,3 +28,33 @@ export const KEYS: Record<string, ButtonId> = {
   Comma: 'gameB',
   KeyD: 'time',
 };
+
+// Координаты в играх — в пикселях экрана (507×324), их можно снять с референсов, вырезав экран.
+// Скорости в пикселях в секунду, время в секундах.
+export const ALL_ABOARD = {
+  gravity: 500,
+  pier: { width: 48, y: 195 },
+  man: { width: 52, height: 50, runSpeed: 110, readyTime: 0.3, flightTime: 1.3, hitboxSize: 14 },
+  ship: {
+    width: 200,
+    height: 111,
+    y: 169,
+    minX: 60,
+    speed: 280,
+    hitbox: { x: 60, y: 38, width: 80, height: 20 },
+  },
+  sea: { y: 235, speed: 20 },
+  spawn: {
+    // Пауза между человечками уменьшается со временем, но не ниже minGap
+    gap: 1.6,
+    minGap: 0.7,
+    gapDecrease: 0.015,
+    // Шанс появления в секунду растёт со временем, но не выше maxChance
+    chance: 1,
+    chanceGrowth: 0.05,
+    maxChance: 3,
+    maxMen: 4,
+    // Доля пути, который кораблик успевает проехать до следующего приземления
+    reach: 0.8,
+  },
+};

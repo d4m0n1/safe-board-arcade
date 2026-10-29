@@ -26,9 +26,10 @@ export const Console = ({ children, onModeSelect }: Props) => {
 
   const setButton = (id: ButtonId, isDown: boolean) => {
     setPressed((prev) => ({ ...prev, [id]: isDown }));
-    if (!isDown) return;
-    if (isMode(id)) onModeSelect(id);
-    else controls.press(id);
+    if (isMode(id)) {
+      if (isDown) onModeSelect(id);
+    } else if (isDown) controls.press(id);
+    else controls.release(id);
   };
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export const Console = ({ children, onModeSelect }: Props) => {
       setButton(id, event.type === 'keydown');
     };
     // Если окно потеряло фокус с зажатой клавишей, keyup не придёт
-    const releaseAll = () => setPressed({});
+    const releaseAll = () => BUTTONS.forEach(({ id }) => setButton(id, false));
     window.addEventListener('keydown', handleKey);
     window.addEventListener('keyup', handleKey);
     window.addEventListener('blur', releaseAll);

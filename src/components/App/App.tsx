@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 import type { Mode } from '../../config';
+import { createAllAboard } from '../../games/allAboard';
 import { Console } from '../Console';
+import { GameShell } from '../GameShell';
 import { TimeScreen } from '../TimeScreen';
 import style from './App.module.less';
-
-const GAME_TITLES = { gameA: 'Treasure Hunt', gameB: 'All Aboard!' };
 
 export const App = () => {
   // key меняется при каждом нажатии, чтобы повторное нажатие «Игра А» возвращало на старт игры
@@ -15,12 +15,20 @@ export const App = () => {
   return (
     <div className={style.app}>
       <Console onModeSelect={selectMode}>
-        {screen.mode === 'time' ? (
-          <TimeScreen />
-        ) : (
+        {screen.mode === 'time' && <TimeScreen />}
+        {screen.mode === 'gameA' && (
           <div key={screen.key} className={style.placeholder}>
-            {GAME_TITLES[screen.mode]}
+            Treasure Hunt
           </div>
+        )}
+        {screen.mode === 'gameB' && (
+          <GameShell
+            key={screen.key}
+            title="All Aboard!"
+            hint="Заберите с собой в путешествие всех!"
+            recordKey="all-aboard-record"
+            createGame={createAllAboard}
+          />
         )}
       </Console>
       <div className={style.hint}>
