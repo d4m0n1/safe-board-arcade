@@ -87,6 +87,7 @@ const config = () => ({
         include: [path.resolve('./src')],
         type: 'javascript/auto',
       },
+      { test: /\.woff2?$/, type: 'asset/resource' },
     ],
   },
   resolve: {

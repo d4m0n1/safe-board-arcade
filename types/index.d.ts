@@ -7,13 +7,19 @@ declare module '*.css' {
 }
 
 declare module '*.module.less' {
-    // eslint-disable-next-line init-declarations
-    const content: { [classNames: string]: string };
-    export default content;
+  // eslint-disable-next-line init-declarations
+  const content: { [classNames: string]: string };
+  export default content;
 }
 
 declare module '*.png' {
-    // eslint-disable-next-line init-declarations
-    const src: string;
-    export default src;
+  // eslint-disable-next-line init-declarations
+  const src: string;
+  export default src;
+}
+
+declare module '*.jpg' {
+  // eslint-disable-next-line init-declarations
+  const src: string;
+  export default src;
 }

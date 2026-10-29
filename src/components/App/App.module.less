@@ -1,3 +1,36 @@
 .app {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 2.5cqw;
+}
+
+.hint {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 32px;
+  margin: 20px 16px;
+  color: #c4d8cb;
+  font-family: monospace;
+  font-size: 16px;
+
+  kbd {
+    display: inline-block;
+    min-width: 1.4em;
+    padding: 2px 4px;
+    border: 1px solid #7d9688;
+    border-radius: 4px;
+    font-family: inherit;
+    text-align: center;
+  }
 }
