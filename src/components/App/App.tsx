@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import type { Mode } from '../../config';
 import { createAllAboard } from '../../games/allAboard';
+import { createTreasureHunt } from '../../games/treasureHunt';
 import { Console } from '../Console';
 import { GameShell } from '../GameShell';
 import { TimeScreen } from '../TimeScreen';
@@ -17,9 +18,13 @@ export const App = () => {
       <Console onModeSelect={selectMode}>
         {screen.mode === 'time' && <TimeScreen />}
         {screen.mode === 'gameA' && (
-          <div key={screen.key} className={style.placeholder}>
-            Treasure Hunt
-          </div>
+          <GameShell
+            key={screen.key}
+            title="Treasure Hunt"
+            hint="Уклоняйтесь от брёвен и собирайте сундуки!"
+            recordKey="treasure-hunt-record"
+            createGame={createTreasureHunt}
+          />
         )}
         {screen.mode === 'gameB' && (
           <GameShell

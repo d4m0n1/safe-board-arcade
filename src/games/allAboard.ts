@@ -1,6 +1,7 @@
 import { ALL_ABOARD, SCREEN_RECT } from '../config';
 import type { Rect } from '../config';
 import { controls } from '../controls';
+import { clamp, random } from './math';
 import { drawSky, drawSprite, drawWaves, sprites } from './sprites';
 import type { Game } from './types';
 
@@ -22,8 +23,6 @@ const SHIP_MAX_X = SCREEN_RECT.width - ship.width;
 // Причал и море рисуются чуть ниже края экрана: нижние края картинок полупрозрачные
 const BOTTOM_BLEED = 8;
 
-const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
-const random = (min: number, max: number) => min + Math.random() * (max - min);
 const overlaps = (a: Rect, b: Rect) =>
   a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
 

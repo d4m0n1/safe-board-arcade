@@ -58,3 +58,41 @@ export const ALL_ABOARD = {
     reach: 0.8,
   },
 };
+
+export const TREASURE_HUNT = {
+  // Верхние края волн трёх линий, от дальней к ближней
+  lanes: [105, 170, 235],
+  waveHeight: 110,
+  // Насколько ниже верхнего края своей волны находятся низ кораблика и предметов
+  laneBaseline: 36,
+  ship: {
+    width: 180,
+    height: 100,
+    minX: 0,
+    maxX: 310,
+    speed: 260,
+    // Линий в секунду при переходе и пауза перед повтором при зажатой кнопке
+    laneSpeed: 7,
+    laneRepeat: 0.3,
+    hitbox: { x: 40, width: 100 },
+  },
+  items: {
+    chest: { width: 44, height: 38, hitbox: { x: 6, width: 32 } },
+    log: { width: 70, height: 44, hitbox: { x: 8, width: 54 } },
+  },
+  // Скорость моря растёт со временем, но не выше max
+  speed: { start: 130, acceleration: 5, max: 280 },
+  spawn: {
+    // Расстояние между рядами предметов уменьшается, но не ниже minRowGap.
+    // minRowGap должен быть больше ширины кораблика + бревна + пути за смену двух линий, иначе ряд не объехать
+    rowGap: 400,
+    minRowGap: 270,
+    rowGapDecrease: 5,
+    // Шанс, что в ряду два бревна вместо одного. Три бревна в ряду не бывает
+    twoLogs: 0.2,
+    twoLogsGrowth: 0.02,
+    maxTwoLogs: 0.7,
+    // Шанс сундука на свободной линии ряда
+    chest: 0.4,
+  },
+};
