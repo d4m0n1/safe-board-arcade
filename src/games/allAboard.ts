@@ -1,6 +1,7 @@
 import { ALL_ABOARD, SCREEN_RECT } from '../config';
 import type { Rect } from '../config';
 import { controls } from '../controls';
+import { sound } from '../sound';
 import { clamp, random } from './math';
 import { drawSky, drawSprite, drawWaves, sprites } from './sprites';
 import type { Game } from './types';
@@ -107,10 +108,14 @@ export const createAllAboard = (): Game => {
       const shipHitbox = { ...ship.hitbox, x: shipX + ship.hitbox.x, y: ship.y + ship.hitbox.y };
       men.forEach((item) => moveMan(item, dt));
       const caught = men.filter((item) => item.vy > 0 && overlaps(manHitbox(item), shipHitbox));
+      if (caught.length) sound.play('catch');
       game.score += caught.length;
       men = men.filter((item) => caught.indexOf(item) === -1);
       // Скрылся под волной — не поймали
-      if (men.some((item) => item.y > sea.y)) game.isOver = true;
+      if (men.some((item) => item.y > sea.y)) {
+        game.isOver = true;
+        sound.play('splash');
+      }
     },
 
     draw(ctx) {

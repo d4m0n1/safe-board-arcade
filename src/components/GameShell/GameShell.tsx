@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { SCREEN_RECT } from '../../config';
 import { controls } from '../../controls';
 import type { Game } from '../../games/types';
+import { sound } from '../../sound';
 import style from './GameShell.module.less';
 
 type Phase = 'start' | 'play' | 'over';
@@ -43,6 +44,7 @@ export const GameShell = ({ title, hint, recordKey, createGame }: Props) => {
     gameRef.current = createGame();
     setScore(0);
     setPhase('play');
+    sound.play('start');
   };
 
   useEffect(
@@ -73,6 +75,7 @@ export const GameShell = ({ title, hint, recordKey, createGame }: Props) => {
           overAtRef.current = now;
           setRecord(saveRecord(recordKey, game.score));
           setPhase('over');
+          sound.play('gameOver', 0.35);
         }
       }
       game.draw(ctx);

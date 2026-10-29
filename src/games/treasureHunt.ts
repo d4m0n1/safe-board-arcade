@@ -1,5 +1,6 @@
 import { SCREEN_RECT, TREASURE_HUNT } from '../config';
 import { controls } from '../controls';
+import { sound } from '../sound';
 import { clamp } from './math';
 import { drawSky, drawSprite, drawWaves, sprites } from './sprites';
 import type { Game } from './types';
@@ -90,8 +91,13 @@ export const createTreasureHunt = (): Game => {
         item.x -= step;
       });
       const touched = items.filter(touchesShip);
-      if (touched.some((item) => item.kind === 'log')) game.isOver = true;
-      game.score += touched.length;
+      const chests = touched.filter((item) => item.kind === 'chest').length;
+      if (chests) sound.play('chest');
+      game.score += chests;
+      if (chests < touched.length) {
+        game.isOver = true;
+        sound.play('crash');
+      }
       items = items.filter((item) => touched.indexOf(item) === -1 && item.x + itemSizes[item.kind].width > 0);
     },
 

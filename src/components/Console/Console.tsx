@@ -5,6 +5,7 @@ import consoleImage from '../../assets/console.png';
 import { BUTTONS, CONSOLE_SIZE, KEYS, SCREEN_RECT } from '../../config';
 import type { ButtonId, Mode, Rect } from '../../config';
 import { controls } from '../../controls';
+import { sound } from '../../sound';
 import style from './Console.module.less';
 
 const toPercent = ({ x, y, width, height }: Rect): CSSProperties => ({
@@ -27,9 +28,13 @@ export const Console = ({ children, onModeSelect }: Props) => {
   const setButton = (id: ButtonId, isDown: boolean) => {
     setPressed((prev) => ({ ...prev, [id]: isDown }));
     if (isMode(id)) {
-      if (isDown) onModeSelect(id);
-    } else if (isDown) controls.press(id);
-    else controls.release(id);
+      if (!isDown) return;
+      sound.play('screen');
+      onModeSelect(id);
+    } else if (isDown) {
+      sound.play('click');
+      controls.press(id);
+    } else controls.release(id);
   };
 
   useEffect(() => {
