@@ -1,0 +1,1 @@
+export { Decor } from './Decor';

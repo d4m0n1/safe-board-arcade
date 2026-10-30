@@ -4,6 +4,14 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  overflow: hidden;
+}
+
+.stage {
+  position: relative;
+  width: ~'min(84vw, (100vh - 150px) * 1073 / 628)';
+  z-index: 0;
+  container-type: inline-size;
 }
 
 .hint {
@@ -11,7 +19,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px 32px;
-  margin: 20px 16px;
+  margin: 32px 16px 20px;
   color: #c4d8cb;
   font-family: monospace;
   font-size: 16px;

@@ -1,0 +1,79 @@
+.item {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+}
+
+.front {
+  .item();
+  z-index: 1;
+  filter: drop-shadow(0 0.6cqw 1cqw rgba(0, 0, 0, 0.45));
+}
+
+.bubble {
+  .item();
+  z-index: -1;
+  animation: float 5s ease-in-out infinite alternate;
+}
+
+// Отзеркалены, чтобы смотреть на приставку
+.bear {
+  .front();
+  right: -9%;
+  bottom: -5%;
+  width: 13%;
+  transform: scaleX(-1);
+}
+
+.chest {
+  .front();
+  left: -10%;
+  bottom: -5%;
+  width: 15%;
+  transform: scaleX(-1);
+}
+
+.starLeft {
+  .front();
+  left: 3%;
+  top: -6%;
+  width: 5%;
+  transform: rotate(-18deg);
+}
+
+.starRight {
+  .front();
+  right: 14%;
+  top: -4%;
+  width: 3.5%;
+  transform: rotate(16deg);
+}
+
+.bubbleLeft {
+  .bubble();
+  left: -8%;
+  top: 22%;
+  width: 6%;
+}
+
+.bubbleRight {
+  .bubble();
+  right: -6%;
+  top: 30%;
+  width: 4%;
+  animation-delay: -2s;
+}
+
+.bubbleTop {
+  .bubble();
+  left: 58%;
+  top: -5%;
+  width: 2.5%;
+  animation-delay: -4s;
+}
+
+@keyframes float {
+  to {
+    transform: translateY(-1.5cqw);
+  }
+}
