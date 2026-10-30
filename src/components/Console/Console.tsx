@@ -73,6 +73,7 @@ export const Console = ({ children, onModeSelect }: Props) => {
           onPointerDown={() => setButton(id, true)}
           onPointerUp={() => setButton(id, false)}
           onPointerLeave={() => pressed[id] && setButton(id, false)}
+          onPointerCancel={() => setButton(id, false)}
         />
       ))}
     </div>

@@ -31,6 +31,8 @@
   border-radius: 999px;
   background: transparent;
   cursor: pointer;
+  // Иначе браузер может начать на кнопке жест прокрутки и не прислать pointerup
+  touch-action: none;
   -webkit-tap-highlight-color: transparent;
 
   &:focus {
