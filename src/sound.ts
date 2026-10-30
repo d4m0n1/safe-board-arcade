@@ -30,10 +30,12 @@ export const sound = {
   play(name: SoundName, delay = 0) {
     if (muted) return;
     // Браузер разрешает звук только после действия пользователя, поэтому контекст создаётся при первом звуке
-    context = context ?? new AudioContext();
-    let time = context.currentTime + delay;
+    const ctx = context ?? new AudioContext();
+    context = ctx;
+    // Safari может перевести контекст в suspended или interrupted, например после переключения приложений
+    if (ctx.state !== 'running') ctx.resume();
+    let time = ctx.currentTime + delay;
     SOUNDS[name].forEach(({ frequency, duration }) => {
-      const ctx = context as AudioContext;
       const oscillator = ctx.createOscillator();
       const gain = ctx.createGain();
       oscillator.type = 'square';

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { SCREEN_RECT } from '../../config';
 import { controls } from '../../controls';
 import type { Game } from '../../games/types';
+import { loadRecord, saveRecord } from '../../records';
 import { sound } from '../../sound';
 import style from './GameShell.module.less';
 
@@ -11,16 +12,6 @@ type Phase = 'start' | 'play' | 'over';
 const SCALE = 3;
 // После проигрыша зажатая стрелка не должна сразу перезапустить игру
 const RESTART_DELAY = 600;
-
-// Сохраняет результат, если это рекорд, и возвращает текущий рекорд
-const saveRecord = (key: string, score: number) => {
-  try {
-    const record = Number(localStorage.getItem(key)) || 0;
-    if (score <= record) return record;
-    localStorage.setItem(key, String(score));
-  } catch {}
-  return score;
-};
 
 type Props = {
   title: string;
@@ -35,7 +26,7 @@ export const GameShell = ({ title, hint, recordKey, createGame }: Props) => {
   const gameRef = useRef(initialGame);
   const [phase, setPhase] = useState<Phase>('start');
   const [score, setScore] = useState(0);
-  const [record, setRecord] = useState(() => saveRecord(recordKey, 0));
+  const [record, setRecord] = useState(() => loadRecord(recordKey));
   const phaseRef = useRef(phase);
   const overAtRef = useRef(0);
   phaseRef.current = phase;

@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "webpack serve",
-    "build": "webpack"
+    "build": "webpack",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@types/classnames": "^2.3.0",
@@ -37,6 +38,7 @@
     "ts-loader": "^9.5.1",
     "typescript": "^5.5.3",
     "url-loader": "^4.1.1",
+    "vitest": "^4.1.12",
     "webpack": "^5.92.1",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.1"

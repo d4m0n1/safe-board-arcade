@@ -6,7 +6,7 @@ import { clamp, random } from './math';
 import { drawSky, drawSprite, drawWaves, sprites } from './sprites';
 import type { Game } from './types';
 
-type Man = {
+export type Man = {
   x: number;
   y: number;
   vx: number;
@@ -35,7 +35,7 @@ const manHitbox = (item: Man): Rect => ({
 });
 
 // Скорость прыжка, чтобы через flightTime центр человечка оказался над targetX на высоте палубы
-const jump = (item: Man) => {
+export const jump = (item: Man) => {
   const time = man.flightTime;
   const fromX = item.x + man.width / 2;
   const fromY = item.y + man.height / 2;
@@ -45,7 +45,7 @@ const jump = (item: Man) => {
   item.phase = 'jump';
 };
 
-const moveMan = (item: Man, dt: number) => {
+export const moveMan = (item: Man, dt: number) => {
   if (item.phase === 'run') {
     item.x = Math.min(JUMP_X, item.x + man.runSpeed * dt);
     if (item.x === JUMP_X) {

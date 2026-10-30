@@ -1,12 +1,11 @@
 import { SCREEN_RECT, TREASURE_HUNT } from '../config';
 import { controls } from '../controls';
 import { sound } from '../sound';
-import { clamp } from './math';
+import { clamp, shuffle } from './math';
 import { drawSky, drawSprite, drawWaves, sprites } from './sprites';
 import type { Game } from './types';
 
-type Kind = 'chest' | 'log';
-type Item = { kind: Kind; lane: number; x: number };
+type Item = { kind: 'chest' | 'log'; lane: number; x: number };
 type LaneButton = 'leftTop' | 'leftBottom';
 
 const { lanes, waveHeight, laneBaseline, ship, items: itemSizes, speed, spawn } = TREASURE_HUNT;
@@ -20,8 +19,9 @@ const shipBottom = (lane: number) => {
   return lanes[from] + (lanes[to] - lanes[from]) * (lane - from) + laneBaseline;
 };
 
-const spawnRow = (twoLogsChance: number): Item[] => {
-  const order = lanes.map((_, index) => index).sort(() => Math.random() - 0.5);
+// Первые линии после перемешивания получают брёвна, остальные — сундук или ничего
+export const spawnRow = (twoLogsChance: number): Item[] => {
+  const order = shuffle(lanes.map((_, index) => index));
   const logCount = Math.random() < twoLogsChance ? 2 : 1;
   return order
     .map((lane, index): Item | null => {

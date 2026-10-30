@@ -30,15 +30,15 @@ export const sprites = {
 
 export const drawSprite = (ctx: CanvasRenderingContext2D, image: HTMLImageElement, rect: Rect, flip = false) => {
   if (!image.complete) return;
-  const { x, y } = rect;
+  const { x, y, width, height } = rect;
   if (!flip) {
-    ctx.drawImage(image, x, y, rect.width, rect.height);
+    ctx.drawImage(image, x, y, width, height);
     return;
   }
   ctx.save();
-  ctx.translate(x + rect.width, y);
+  ctx.translate(x + width, y);
   ctx.scale(-1, 1);
-  ctx.drawImage(image, 0, 0, rect.width, rect.height);
+  ctx.drawImage(image, 0, 0, width, height);
   ctx.restore();
 };
 
